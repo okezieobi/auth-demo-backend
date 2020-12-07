@@ -1,3 +1,4 @@
+import jwt from '../utils/jwt';
 export default class UserController {
   constructor({ user }) {
     this.services = user;
@@ -32,6 +33,20 @@ export default class UserController {
     await this.services.authJWT(res.locals.userId).then((data) => {
       if (data.message) throw data;
       else next();
+    }).catch(next);
+  }
+
+  async encodeJWT(req, res, next) {
+    res.locals.data.token =  await jwt.generate(res.locals.data.user);
+    res.set('token', res.locals.data.token);
+    next();
+  }
+
+  async decodeJWT({ headers }, res, next) {
+    await jwt.verify(headers)
+    .then(({ _id }) => {
+      res.locals.userId = _id;
+      next();
     }).catch(next);
   }
 }

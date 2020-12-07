@@ -1,10 +1,10 @@
 {
-  "name": "draftbit-app",
+  "name": "auth-demo",
   "version": "0.0.0",
-  "main": "dist/bin/firebase.js",
+  "main": "",
   "directories": {},
   "scripts": {
-    "dev": "DEBUG=draftbit-app:* nodemon --exec babel-node src/bin/www.js",
+    "dev": "DEBUG=auth-demo:* nodemon --exec babel-node src/bin/www.js",
     "release": "npm run clean && npm run build",
     "clean": "rm -rf dist && mkdir dist",
     "build": "npm run clean && npm run build-app",
